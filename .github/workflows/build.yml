@@ -25,6 +25,11 @@ jobs:
           pip install --upgrade pip setuptools
           pip install cython==0.29.33 buildozer
 
+      - name: Install Android Build-Tools and Accept Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;33.0.2" "platforms;android-33" "platform-tools"
+
       - name: Build APK with Buildozer
         env:
           APP_ANDROID_ACCEPT_ALL_LICENSES: "1"
